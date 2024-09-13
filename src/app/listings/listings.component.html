@@ -1,0 +1,73 @@
+<!-- <div class="container">
+    <div class="col-md-2">
+        <app-filter-panel (filterChange)="onFilter($event)" (resetEvent)="onReset()"></app-filter-panel>
+    </div>
+    <div class="col-md-9">
+        <div class="content-container">
+            <div class="col-md-3">
+                <app-sort-panel (sortChange)="onSort($event)"></app-sort-panel>
+            </div> -->
+            <!-- <div class="listings-container" *ngFor="let page of pageMap | keyvalue"> -->
+            <!-- <div class="col-md-9"> -->
+                <!-- <div *ngIf="currentPage === page.key"> -->
+                    <!-- <div class="row" *ngFor="let subArray of page.value"> -->
+                <!-- <div class="listings-container"> -->
+                    <!-- <div class="col-md-3" *ngFor="let subArray of page.value"> -->
+                        <!-- <div class="row">
+                            <div class="col-md-4 mb-4" *ngFor="let item of listings">
+                                <img src="assets/car.jpg" alt="Title">
+                                <div class="listing-info">
+                                    <h2>{{item.title || "Title"}}</h2>
+                                    <p>{{item.rent || 100}}</p>
+                                    <p>{{item.textcontent}}</p>
+                                    <p>{{item.make}}</p>
+                                    <p>{{item.year}}</p>
+                                </div>
+                            </div>
+                        </div> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
+    <!-- <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{currentPage}} of {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div> -->
+    <!-- </div>
+</div> -->
+
+<div class="container">
+    <app-filter-panel (filterChange)="onFilter($event)" (resetEvent)="onReset()"></app-filter-panel>
+    <div class="container col-md-12">
+        <section>
+            <div class="row">
+                <app-sort-panel (sortChange)="onSort($event)" (totalListings)="this.listings.length"></app-sort-panel>
+            </div>
+            <div class="listings-container" *ngFor="let page of pageMap | keyvalue">
+                <div *ngIf="currentPage === page.key">
+                    <div class="row" *ngFor="let subArray of page.value">
+                        <div class="col-md-4 mb-2 listing-card" *ngFor="let item of subArray" [routerLink]="['/listings', item.id]" style="cursor: pointer;">
+                            <img src="{{ item.imagepath === null ? 'assets/car.jpg' : 'http://127.0.0.1:48550/' + item.imagepath}}" alt="Title">
+                            <div class="listing-info">
+                                <h2>{{item.title || "Title"}}</h2>
+                                <p>{{item.rent || 100}}</p>
+                                <p>{{item.textcontent}}</p>
+                                <p>{{item.make}}</p>
+                                <p>{{item.year}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-pagination-control [totalPages]="this.totalPages" (pageChange)="onPageChange($event)"></app-pagination-control>
+            <!-- <div class="pagination-controls text-center mt-4">
+                <button (click)="previousPage()" [disabled]="currentPage === 1" class="btn btn-secondary">Previous</button>
+                <span class="mx-2">Page {{currentPage}} of {{totalPages}}</span>
+                <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="btn btn-secondary">Next</button>
+            </div> -->
+        </section>
+        <!-- <app-pagination-control [totalPages]="this.totalPages" (pageChange)="onPageChange($event)"></app-pagination-control> -->
+    </div>
+</div>
+

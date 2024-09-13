@@ -1,0 +1,15 @@
+<div class="pagination">
+    <a href="#" class="prev" [class.disabled]="this.currentPage === 1" (click)="onChangePage($event, -1)">&laquo; Previous</a>
+    <!-- <a href="#" 
+       class="page-number" 
+       *ngFor="let page of pageNumbers; let i = index" 
+       [class.active]="currentPage === page">
+      {{ page }}
+    </a> -->
+    <!-- <a href="#" class="page-number active">1</a>
+    <a href="#" class="page-number">2</a>
+    <a href="#" class="page-number">3</a>
+    <span class="dots">...</span>
+    <a href="#" class="page-number">7</a> -->
+    <a href="#" class="next" [class.disabled]="this.currentPage === totalPages" (click)="onChangePage($event, 1)">Next &raquo;</a>
+</div>

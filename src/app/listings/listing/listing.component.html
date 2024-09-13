@@ -1,0 +1,49 @@
+<div class="listing-page">
+    <!-- Sidebar Section (Price and Owner Info) -->
+    <div class="sidebar">
+        <!-- Price Card -->
+        <div class="card price-card">
+            <h2>${{this.listing.rent}}/week</h2>
+        </div>
+
+        <!-- Owner Info Card -->
+        <div class="card owner-card">
+            <h3>Listing Owner</h3>
+            <p>Name: John Doe</p>
+            <p>Contact: johndoe@example.com</p>
+        </div>
+    </div>
+  
+    <!-- Main Content Section -->
+    <div class="main-content">
+      <!-- Car Image Section -->
+      <div class="car-image">
+        <img src="{{ this.listing.imagepath === null ? 'assets/car.jpg' : 'http://127.0.0.1:48550/' + this.listing.imagepath}}" alt="Car Image">
+      </div>
+  
+      <!-- Car Details Section -->
+      <div class="car-specifics">
+            <div class="card car-details">
+                <h3>Car Details</h3>
+                <ul>
+                <li>{{"Make: " + this.listing.make}}</li>
+                <li>{{"Model: " + this.listing.model}}</li>
+                <li>{{"Year: " + this.listing.year}}</li>
+                <li>{{"Mileage: " + this.listing.mileage}}</li>
+                <li>Transmission: Automatic</li>
+                </ul>
+            </div>
+            <div class="card car-description">
+                <h3>Description</h3>
+                <p>{{this.listing.textcontent}}</p>
+            </div>
+        </div>
+  
+      <!-- Comment Section -->
+      <div class="comments-section">
+        <h3>Leave a Comment</h3>
+        <textarea placeholder="Write your comment here..."></textarea>
+        <button>Submit Comment</button>
+      </div>
+    </div>
+  </div>

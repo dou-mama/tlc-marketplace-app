@@ -1,0 +1,83 @@
+<!-- <div class="container">
+    <section class="row">
+        <div class="col-md-12 mx-auto mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="listingForm">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> -->
+<div class="container my-4">
+    <h2 class="text-center mb-4">Create Car Listing</h2>
+    <form *ngIf="listingForm" [formGroup]="listingForm">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="make">Make</label>
+                    <input type="text" id="make" class="form-control" placeholder="Enter car make" formControlName="make">
+                    <span class="text-danger text-small" *ngIf="make?.invalid && (make?.dirty || make?.touched)">Please enter a make</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="description">Title</label>
+                    <textarea id="title" class="form-control" rows="1" placeholder="Enter a title for your listing" formControlName="title"></textarea>
+                    <span class="text-danger text-small" *ngIf="title?.invalid && (title?.dirty || title?.touched)">Please enter a title</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="textcontent" class="form-control" rows="3" placeholder="Enter car description" formControlName="textcontent"></textarea>
+                    <span class="text-danger text-small" *ngIf="textcontent?.invalid && (textcontent?.dirty || textcontent?.touched)">Please enter a description</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" id="rent" class="form-control" placeholder="Enter price" formControlName="rent">
+                            <span class="text-danger text-small" *ngIf="rent?.invalid && (rent?.dirty || rent?.touched)">Please enter a rent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <input type="number" id="year" class="form-control" placeholder="Enter year" formControlName="year">
+                            <span class="text-danger text-small" *ngIf="year?.invalid && (year?.dirty || year?.touched)">Please enter a year</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-3">
+            <div class="card-body">
+                <label for="image">Image</label>
+                <input type="file" id="image" class="form-control-file" (change)="onImageSelected($event)">
+                <div *ngIf="imagePreview" class="mt-3">
+                    <img [src]="imagePreview" alt="Car Image Preview" class="img-thumbnail">
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-block" (click)="onSubmit()" [disabled]="this.listingForm.invalid">Submit Listing</button>
+    </form>
+  </div>
