@@ -1,0 +1,38 @@
+<div class="banner">
+    <div class="banner-content">
+      <h1>TLC MARKETPLACE</h1>
+      <nav>
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+        <a routerLink="/listings" routerLinkActive="active">Listings</a>
+        <a routerLink="/about" routerLinkActive="active">About</a>
+        <a routerLink="/services" routerLinkActive="active">Services</a>
+        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        <a *ngIf="isLoggedIn" routerLink="/listingCreation" routerLinkActive="active">Create a Listing</a>
+        <a *ngIf="isLoggedIn" (click)="logout($event)" href="#">Log Out</a>
+        <a *ngIf="!isLoggedIn" routerLink="/login" routerLinkActive="active">Log In</a>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+<!-- <div>
+    <nav class="container-fluid navbar ">
+        <div>
+            <ul class="navbar-nav m1-auto text-right">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active">LISTINGS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/about" routerLinkActive="active">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">LOGIN</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+</div> -->
