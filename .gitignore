@@ -42,6 +42,6 @@ testem.log
 Thumbs.db
 
 # Ignore config files
-config.json
+config.env
 .env
 secrets.yaml
