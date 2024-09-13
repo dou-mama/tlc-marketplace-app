@@ -1,0 +1,21 @@
+<div class="sort-panel">
+    <div class="ads-count">
+      Showing {{totalListings}} ads found
+    </div>
+    <div class="sort-controls">
+      <label for="sort-by">Sort By</label>
+      <select id="sort-by" (change)="onSortChange($event)">
+        <option value="date">Date</option>
+        <option value="price">Price</option>
+        <!-- <option value="popularity">Popularity</option> -->
+      </select>
+      <!-- <div class="view-options">
+        <button class="view-option active">
+          <img src="assets/grid-view-icon.png" alt="Grid View">
+        </button>
+        <button class="view-option">
+          <img src="assets/list-view-icon.png" alt="List View">
+        </button>
+      </div> -->
+    </div>
+  </div>

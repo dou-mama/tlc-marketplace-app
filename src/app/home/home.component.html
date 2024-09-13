@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <!-- Brief Info Section -->
+    <section class="info-section text-center mb-5">
+      <h2>Welcome to Our Car Listings Site!</h2>
+      <p>Find the best deals on new and used cars. We offer a wide range of vehicles to suit all budgets and preferences.</p>
+    </section>
+  
+    <!-- Most Recent Listings Section -->
+    <section class="recent-listings-section mb-5">
+      <h3>Most Recent Listings</h3>
+      <div class="row">
+        <!-- Example of a listing -->
+        <div class="col-md-4 mb-4" *ngFor="let listing of listings" [routerLink]="['/listings', listing.id]" style="cursor: pointer;">
+          <div class="card">
+            <img class="card-img-top" src="{{ listing.imagepath === null ? 'assets/car.jpg' : 'http://127.0.0.1:48550/' + listing.imagepath}}" alt="{{listing.title}}">
+            <div class="card-body">
+              <h5 class="card-title">{{listing.title}}</h5>
+              <p class="card-text">{{listing.textcontent}}</p>
+              <p class="card-text"><strong>Price:</strong> {{listing.rent}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button class="btn btn-primary" routerLink="/listings" routerLinkActive="active">View All Listings</button>
+      </div>
+    </section>
+  
+    <!-- Login or Sign Up Section -->
+    <section *ngIf="!isLoggedIn" class="login-signup-section text-center mb-5">
+      <h3>Join Us Today</h3>
+      <p>Create an account or log in to access more features and personalize your experience.</p>
+      <div class="mt-4">
+        <button class="btn btn-success mr-3" routerLink="/signup" routerLinkActive="active">Sign Up</button>
+        <button class="btn btn-secondary" routerLink="/login" routerLinkActive="active">Log In</button>
+      </div>
+    </section>
+  </div>
+  

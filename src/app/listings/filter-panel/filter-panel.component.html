@@ -1,0 +1,121 @@
+<div class="filter-panel">
+    <h2>Filter Ads</h2>
+    <form *ngIf="filterForm" [formGroup]="filterForm">
+        <div class="form-group">
+            <div>
+                <label for="keyword">Make</label>
+                <input type="text" class="form-control" formControlName="make" id="make" placeholder="Enter the make">
+                <span class="text-danger text-small" *ngIf="make && make.invalid && (make.dirty || make.touched) && make.errors?.['hasDigit']">Please enter a valid make</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="keyword">Year</label>
+                <p>Between</p>
+                <input type="text" class="form-control" formControlName="minYear" id="minYear" placeholder="Enter min year">
+                <div *ngIf="minYear && minYear.invalid && (minYear.dirty || minYear.touched)">
+                    <span class="text-danger text-small" *ngIf="minYear.errors?.['hasLetter']">Please enter a valid year</span>
+                    <span class="text-danger text-small" *ngIf="minYear.errors?.['min']">Minimum year is 1960</span>
+                </div>
+                <p>and</p>
+                <input type="text" class="form-control" formControlName="maxYear" id="maxYear" placeholder="Enter max year">
+                <div *ngIf="maxYear && maxYear.invalid && (maxYear.dirty || maxYear.touched)">
+                    <span class="text-danger text-small" *ngIf="maxYear.errors?.['hasLetter']">Please enter a valid year</span>
+                    <span class="text-danger text-small" *ngIf="maxYear.errors?.['max']">Maximum year is 2025</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="keyword">Price</label>
+                <p>Min</p>
+                <input type="text" class="form-control" formControlName="minPrice" id="minPrice" placeholder="Enter min price">
+                <span class="text-danger text-small" *ngIf="minPrice && minPrice.invalid && (minPrice.dirty || minPrice.touched) && minPrice.errors?.['hasLetter']">Please enter a numeric value</span>
+                <p>Max</p>
+                <input type="text" class="form-control" formControlName="maxPrice" id="maxPrice" placeholder="Enter max price">
+                <span class="text-danger text-small" *ngIf="maxPrice && maxPrice.invalid && (maxPrice.dirty || maxPrice.touched) && maxPrice.errors?.['hasLetter']">Please enter a numeric value</span>
+            </div>
+        </div>
+        <button type="submit" (click)="onFilterChange()" [disabled]="filterForm.invalid">Apply Filters</button>
+        <br>
+        <br>
+        <button (click)="onReset()">Reset Filters</button>
+    </form>
+</div>
+
+ <!-- <div class="form-group">
+        <label for="keyword">Keyword</label>
+        <input type="text" id="keyword" placeholder="2018">
+    </div> -->
+
+<!-- <div class="form-group">
+            <label>Category</label>
+            <div>
+            <input type="radio" id="category-all" name="category" value="all" checked>
+            <label for="category-all">All</label>
+            </div>
+            <div>
+            <input type="radio" id="category-cars" name="category" value="cars">
+            <label for="category-cars">Cars</label>
+            </div>
+        </div> -->
+        
+        <!-- <div class="form-group">
+            <label>Location</label>
+            <div>
+            <input type="radio" id="location-all" name="location" value="all" checked>
+            <label for="location-all">All</label>
+            </div>
+            <div>
+            <input type="radio" id="location-us" name="location" value="us">
+            <label for="location-us">United States</label>
+            </div>
+        </div> -->
+        
+        <!-- <div class="form-group">
+            <label for="price">Price</label>
+            <input type="range" id="price" min="0" max="400000" step="1000" value="0">
+            <div class="price-values">
+            <span>$0</span>
+            <span>$400,000</span>
+            </div>
+        </div> -->
+        
+        <!-- <div class="form-group">
+            <label>Condition</label>
+            <div>
+            <input type="radio" id="condition-all" name="condition" value="all" checked>
+            <label for="condition-all">All</label>
+            </div>
+            <div>
+            <input type="radio" id="condition-new" name="condition" value="new">
+            <label for="condition-new">New</label>
+            </div>
+            <div>
+            <input type="radio" id="condition-refurbished" name="condition" value="refurbished">
+            <label for="condition-refurbished">Manufacturer Refurbished</label>
+            </div>
+            <div>
+            <input type="radio" id="condition-used" name="condition" value="used">
+            <label for="condition-used">Used</label>
+            </div>
+            <div>
+            <input type="radio" id="condition-parts" name="condition" value="parts">
+            <label for="condition-parts">For Parts Or Not Working</label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div>
+            <input type="checkbox" id="images-only">
+            <label for="images-only">Show ads with image(s) only</label>
+            </div>
+            <div>
+            <input type="checkbox" id="negotiable-only">
+            <label for="negotiable-only">Show negotiable ads only</label>
+            </div>
+            <div>
+            <input type="checkbox" id="urgent-only">
+            <label for="urgent-only">Show only urgent ads</label>
+            </div>
+        </div> -->

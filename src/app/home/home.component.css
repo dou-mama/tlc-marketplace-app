@@ -1,0 +1,82 @@
+/* General Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Brief Info Section */
+  .info-section {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+  }
+  
+  .info-section h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  .info-section p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  /* Most Recent Listings Section */
+  .recent-listings-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    border: none;
+    transition: box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  /* View All Listings Button */
+  .btn-primary {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
+  /* Login or Sign Up Section */
+  .login-signup-section {
+    background-color: #f1f1f1;
+    padding: 30px;
+    border-radius: 8px;
+  }
+  
+  .login-signup-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .login-signup-section p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .login-signup-section button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
