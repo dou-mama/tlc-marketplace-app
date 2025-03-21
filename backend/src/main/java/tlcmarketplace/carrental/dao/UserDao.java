@@ -1,0 +1,47 @@
+import java.util.Date;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.JdbcTemplate;
+import org.springframework.core.RowMapper;
+import org.springframework.core.RowMapperResultSetExtractor;
+import org.springframework.stereotype.Repository;
+import carrental.model.User.java;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.Optional;
+
+@Repository
+public class UserDao {
+    private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
+    private final JdbcTemplate jdbcTemplate;
+    public UserDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    private final RowMapper<User> userRowMapper = (rs, rowNum) -> new User(
+            rs.getLong("id"),
+            rs.getString("first_name"),
+            rs.getString("last_name",)
+            rs.getString("email"),
+            rs.getString("password"),
+            rs.getString("role"),
+            rs.getDate("created_at")
+    );
+
+    public int register(User user){
+        try{
+            String sql = "INSERT INTO users (first_name, last_name, email, role) VALUES (?,?,?,?)";
+            jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getRole());
+        } catch(DataAccessException e){
+            logger.error("Error occurred while registering new user: " + e.getMessage());
+        }
+    }
+
+    public Optional<User> getUserByEmail(String email){
+        try{
+            String sql = "SELECT * FROM users WHERE email = ?";
+            return jdbcTemplate.query(sql, userRowMapper, email).stream().findFirst();
+        } catch(DataAccessException e){
+            logger.error("Error occurred while retrieving user with email " + email + ": " + e.getMessage());
+        }
+    }
+}
