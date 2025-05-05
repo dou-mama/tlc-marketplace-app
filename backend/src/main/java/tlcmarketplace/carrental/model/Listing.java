@@ -1,11 +1,12 @@
 package tlcmarketplace.carrental.model;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Listing{
     
-    private String id;
-    private String ownerId;
+    private Long id;
+    private UUID ownerId;
     private String title;
     private String description;
     private double price;
@@ -13,7 +14,7 @@ public class Listing{
 
     public Listing(){}
 
-    public Listing(String id, String ownerId, String title, String description, double price, Date createdAt){
+    public Listing(Long id, UUID ownerId, String title, String description, double price, Date createdAt){
         this.id = id;
         this.ownerId = ownerId;
         this.title = title;
@@ -22,18 +23,18 @@ public class Listing{
         this.createdAt = createdAt;
     }
 
-    public Listing(String ownerId, String title, String description, double price){
+    public Listing(UUID ownerId, String title, String description, double price){
         this.ownerId = ownerId;
         this.title = title;
         this.description = description;
         this.price = price;
     }
 
-    public String getId() {return this.id;}
-    public void setId(String id) {this.id = id;}
+    public Long getId() {return this.id;}
+    public void setId(Long id) {this.id = id;}
 
-    public String getOwnerId() {return this.ownerId;}
-    public void setOwnerId(String ownerId) {this.ownerId = ownerId;}
+    public UUID getOwnerId() {return this.ownerId;}
+    public void setOwnerId(UUID ownerId) {this.ownerId = ownerId;}
 
     public String getTitle() {return this.title;}
     public void setTitle(String title) {this.title = title;}
@@ -46,4 +47,15 @@ public class Listing{
 
     public Date getCreatedAt() {return this.createdAt;}
     public void setCreatedAt(Date createdAt) {this.createdAt = createdAt;}
+
+    public String toString(){
+        return "Listing{" +
+                "id='" + getId() + '\'' +
+                ", ownerId='" + getOwnerId() + '\'' +
+                ", title='" + getTitle() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", price=" + getPrice() +
+                ", createdAt=" + getCreatedAt() +
+                '}';
+    }
 }

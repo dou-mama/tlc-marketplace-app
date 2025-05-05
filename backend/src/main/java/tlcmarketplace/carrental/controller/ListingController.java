@@ -26,49 +26,36 @@ public class ListingController{
 
     public ListingController(ListingService listingService){this.listingService = listingService;}
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<?> createListing(@RequestBody Listing listing){
-        try{
-            int updatedRows = listingService.createListing(listing);
-            if(updatedRows > 0) return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "car created successfully"));
-            // if(updatedRows > 0) return new ResponseEntity("Successfully created the listing: " + listing.getTitle(), HttpStatus.CREATED);
-            else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "could not create the listing"));
-        } catch(DatabaseException e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "could not create the listing: " + e.getMessage()));
-        }
+        logger.info("creating listing" + listing);
+
+        Listing newListing = listingService.createListing(listing);
+        //check if the listing was created successfully
+        if(newListing == null) return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "could not create the listing"));
+        else return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("listing", newListing));
     } 
 
     @GetMapping("/owner")
-    public ResponseEntity<?> getListingsByOwnerId(@RequestParam String ownerId){
-        try {
-            List<Listing> listings = listingService.getListingsByOwner(ownerId);
-            if(listings.isEmpty()) return ResponseEntity.noContent().build();
-            else return ResponseEntity.ok(listings);
-        } catch (DatabaseException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "not found"));
-        }
+    public ResponseEntity<?> getListingsByOwnerId(@RequestParam("ownerId") String ownerId){
+        List<Listing> listings = listingService.getListingsByOwner(ownerId);
+        if(listings.isEmpty()) return ResponseEntity.noContent().build();
+        else return ResponseEntity.ok(listings);
     }
 
     @GetMapping("/listing")
-    public ResponseEntity<?> getListingById(@RequestParam String id){
-        try {
-            Listing listing = listingService.getListing(id);
-            return ResponseEntity.ok(listing);
-        } 
-        catch (DatabaseException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "resource not found"));
-        } 
+    public ResponseEntity<?> getListingById(@RequestParam("id") String id){
+        logger.info("getting listing with id: " + id);
+        Listing listing = listingService.getListing(id);
+        return ResponseEntity.ok(listing);
     }
 
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> getAllListings(){
-        try{
-            List<Listing> listings = listingService.getAllListings();
-            if(!listings.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "no listings were returned"));
-            return ResponseEntity.ok(listingService.getAllListings());
-        } catch(DatabaseException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "error processing request: " + e.getMessage()));
-        }
+        logger.info("getting all listings");
+        List<Listing> listings = listingService.getAllListings();
+        if(listings.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "no listings were returned"));
+        return ResponseEntity.ok(listingService.getAllListings());
     }
 }
