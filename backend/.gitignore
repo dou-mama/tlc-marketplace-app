@@ -17,6 +17,8 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
+.vscode/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
