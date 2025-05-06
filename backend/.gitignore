@@ -18,6 +18,7 @@ bin/
 !**/src/test/**/bin/
 
 .vscode/launch.json
+jlkj
 
 ### IntelliJ IDEA ###
 .idea
