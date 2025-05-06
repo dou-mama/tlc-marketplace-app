@@ -24,7 +24,9 @@ public class ListingService {
         logger.info("created listing with id: " + id);
         return listingDao.getListingById(id.toString());
     }
+    public int updateListing(Listing listing) {return listingDao.updateListing(listing);}
     public Listing getListing(String id) {return listingDao.getListingById(id);}
+    public int deleteListing(String id) {return listingDao.deleteListing(id);}
     public List<Listing> getListingsByOwner(String id) {return listingDao.getListingsByOwner(id);}
     public List<Listing> getAllListings() {return listingDao.getAllListings();}
 }

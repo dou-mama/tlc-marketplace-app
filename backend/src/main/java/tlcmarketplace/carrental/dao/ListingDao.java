@@ -58,26 +58,23 @@ public class ListingDao{
                 },
                 Long.class
             );
-
-
-            // KeyHolder keyHolder = new GeneratedKeyHolder();
-
-            // jdbcTemplate.update(connection -> {
-            //     PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            //     ps.setObject(1, UUID.fromString(listing.getOwnerId()));  // owner_id
-            //     ps.setString(2, listing.getTitle());                     // title
-            //     ps.setString(3, listing.getDescription());               // description
-            //     ps.setDouble(4, listing.getPrice());                 // price
-            //     ps.setTimestamp(5, Timestamp.from(Instant.now()));       // created_at
-            //     return ps;
-            // }, keyHolder);
-            // logger.info("Created listing with id: " + keyHolder.getKeys().get("id"));
-            // UUID id = (UUID) keyHolder.getKeys().get("id");
             return id;  // or keyHolder.getKey() if returning only one column
         } catch (DataAccessException e) {
             logger.error("SQL Error creating listing", e);
             return null;
         }
+    }
+
+    public int updateListing(Listing listing){
+        String sql = "UPDATE listings SET title = ?, description = ?, price = ? WHERE id = ?";
+        int rows = jdbcTemplate.update(sql, listing.getTitle(), listing.getDescription(), listing.getPrice(), listing.getId());
+        return rows;
+    }
+
+    public int deleteListing(String id){
+        String sql = "DELETE FROM listings WHERE id = ?";
+        int rows = jdbcTemplate.update(sql, Long.parseLong(id));
+        return rows;
     }
 
     public Listing getListingById(String id){
@@ -89,7 +86,6 @@ public class ListingDao{
             logger.error("Error occurred while retrieving listing with id " + id + ": ", e);
             throw new DatabaseException("Error querying listing by id", e);
         }
-        // return null;
     }
 
     public List<Listing> getListingsByOwner(String ownerId){
