@@ -8,7 +8,7 @@
         "mainClass": "tlcmarketplace.Application",
         "projectName": "demo-backend",
         "env": {
-          "SUPABASE_JWT_SECRET": "lkjkj"
+          "SUPABASE_JWT_SECRET": "lkjkjlkjk"
         }
       }
     ]
