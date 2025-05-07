@@ -1,17 +1,14 @@
 package tlcmarketplace.carrental.dao;
 
-import java.util.Date;
-import org.springframework.dao.DataAccessException;
-// import org.springframework.jdbc.JdbcTemplate;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.RowMapperResultSetExtractor;
-import org.springframework.stereotype.Repository;
-import tlcmarketplace.carrental.model.User;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.Optional;
-import java.util.List;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import tlcmarketplace.carrental.model.User;
 
 @Repository
 public class UserDao {
@@ -22,11 +19,19 @@ public class UserDao {
     }
 
     private final RowMapper<User> userRowMapper = (rs, rowNum) -> new User(
-            rs.getString("id"),
+            rs.getObject("id", UUID.class),
             rs.getString("full_name"),
             rs.getString("email"),
             rs.getDate("created_at")
     );
+
+    public int updateUser(User user){
+        String sql = "UPDATE users SET full_name = ? WHERE email = ? ";
+        int rows = jdbcTemplate.update(sql, user.getFullName(), user.getEmail());
+        return rows;
+    }
+
+
 
     // public int register(User user){
     //     try{
@@ -37,13 +42,8 @@ public class UserDao {
     //     }
     // }
 
-    public Optional<User> getUserByEmail(String email){
-        try{
-            String sql = "SELECT * FROM users WHERE email = ?";
-            return jdbcTemplate.query(sql, userRowMapper, email).stream().findFirst();
-        } catch(DataAccessException e){
-            logger.error("Error occurred while retrieving user with email " + email + ": " + e.getMessage());
-            return null;
-        }
-    }
+    public User getUser(String email){
+        String sql = "SELECT * FROM users WHERE email = ?";
+        return jdbcTemplate.queryForObject(sql, userRowMapper, email);
+    } 
 }

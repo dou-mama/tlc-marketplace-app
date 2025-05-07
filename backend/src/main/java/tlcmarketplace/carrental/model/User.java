@@ -1,10 +1,11 @@
 package tlcmarketplace.carrental.model;
 
 import java.util.Date;
+import java.util.UUID;
 
 
 public class User {
-    private String id;
+    private UUID id;
     private String fullName;
     private String email;
     // private String role;
@@ -12,18 +13,18 @@ public class User {
 
     public User() {}
 
-    public User(String id, String email, String fullName, Date createdDatetime) {
+    public User(UUID id, String email, String fullName, Date createdDatetime) {
         this.id = id;
         this.email = email;
         this.fullName = fullName;
         this.createdDatetime = createdDatetime;
     }
 
-    public void setId(String id){
+    public void setId(UUID id){
         this.id = id;
     }
 
-    public String getId(){
+    public UUID getId(){
         return this.id;
     }
 

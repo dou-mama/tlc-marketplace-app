@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import tlcmarketplace.carrental.dao.ListingDao;
 
@@ -23,6 +24,13 @@ public class GlobalExceptionHandler {
         logger.error("access denied error: ", e);
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(Map.of("error", "Access Denied"));
+    }
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseEntity<?> handleResourceNotFound(org.springframework.dao.EmptyResultDataAccessException e) {
+        logger.error("resource not found error: ", e);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("error", "Resource Not Found"));
     }
 
     @ExceptionHandler(DatabaseException.class)

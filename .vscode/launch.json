@@ -1,14 +1,13 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "type": "java",
-        "name": "Spring Boot",
-        "request": "launch",
-        "mainClass": "tlcmarketplace.Application",
-        "projectName": "demo-backend",
-        "envFile": "${workspaceFolder}/.env"
-      }
-    ]
-  }
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Application",
+      "request": "launch",
+      "mainClass": "tlcmarketplace.carrental.Application",
+      "projectName": "backend"
+    }
+  ]
+}
   
