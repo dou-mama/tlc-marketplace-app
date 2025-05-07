@@ -17,7 +17,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-.vscode/launch.json
+.vscode/
 
 ### IntelliJ IDEA ###
 .idea
@@ -39,4 +39,4 @@ out/
 .vscode/
 
 /src/main/resources/application.properties
-.env
+.env.*
