@@ -26,7 +26,7 @@ public class UserController {
 
     @PutMapping("")
     public ResponseEntity<?> updateUser(@RequestBody User user){
-        logger.info("updating user with email: " + user.getEmail());
+        logger.info("updating user with email: " + user.getEmail() + " and name: " + user.getFullName());
         int rows = userService.updateUser(user);
         logger.info("updated rows: " + rows);
         if(rows == 0) return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "user not created"));

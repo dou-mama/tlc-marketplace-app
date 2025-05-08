@@ -7,6 +7,7 @@ export class AuthService {
   private supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
 
   async login(email: string, password: string) {
+    console.log('email', email), 'password', password;
     const { data, error } = await this.supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
     // localStorage.setItem('access_token', data.session.access_token);

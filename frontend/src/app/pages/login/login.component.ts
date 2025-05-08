@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -32,11 +34,8 @@ export class LoginComponent {
         this.router.navigate(['/']);
       } catch (error) {
         this.errorMessage = 'Invalid email or password';
+        console.error('Login error:', error);
       }
     }
-  }
-
-  register() {
-    this.router.navigate(['/register']);
   }
 }
