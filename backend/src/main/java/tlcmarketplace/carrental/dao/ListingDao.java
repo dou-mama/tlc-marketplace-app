@@ -35,14 +35,16 @@ public class ListingDao{
             rs.getObject("owner_id", UUID.class),
             rs.getString("title"),
             rs.getString("description"),
+            rs.getString("type"),
+            rs.getString("image_url"),
             rs.getDouble("price"),
             rs.getDate("created_at")
     );
 
     public Long createListing(Listing listing) {
         try {
-            String sql = "INSERT INTO listings (owner_id, title, description, price, created_at) " +
-                        "VALUES (?, ?, ?, ?, ?) RETURNING id";
+            String sql = "INSERT INTO listings (owner_id, title, description, type, image_url, price, created_at) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id";
 
             // jdbcTemplate.update(sql, UUID.fromString(listing.getOwnerId()), listing.getTitle(), listing.getDescription(), listing.getPrice(), Timestamp.from(Instant.now()));
 
@@ -53,6 +55,8 @@ public class ListingDao{
                     listing.getOwnerId(),
                     listing.getTitle(),
                     listing.getDescription(),
+                    listing.getType(),
+                    listing.getImageUrl(),
                     listing.getPrice(),
                     Timestamp.from(Instant.now())
                 },
@@ -66,8 +70,8 @@ public class ListingDao{
     }
 
     public int updateListing(Listing listing){
-        String sql = "UPDATE listings SET title = ?, description = ?, price = ? WHERE id = ?";
-        int rows = jdbcTemplate.update(sql, listing.getTitle(), listing.getDescription(), listing.getPrice(), listing.getId());
+        String sql = "UPDATE listings SET title = ?, description = ?, imageUrl = ?, price = ? WHERE id = ?";
+        int rows = jdbcTemplate.update(sql, listing.getTitle(), listing.getDescription(), listing.getImageUrl(), listing.getPrice(), listing.getId());
         return rows;
     }
 
@@ -78,36 +82,29 @@ public class ListingDao{
     }
 
     public Listing getListingById(String id){
-        try{
-            String sql = "SELECT * FROM listings WHERE id=?";
-            return jdbcTemplate.queryForObject(sql, listingRowMapper, Long.parseLong(id));
-        }
-        catch(DataAccessException e){
-            logger.error("Error occurred while retrieving listing with id " + id + ": ", e);
-            throw new DatabaseException("Error querying listing by id", e);
-        }
+        String sql = "SELECT * FROM listings WHERE id=?";
+        return jdbcTemplate.queryForObject(sql, listingRowMapper, Long.parseLong(id));
+        // catch(DataAccessException e){
+        //     logger.error("Error occurred while retrieving listing with id " + id + ": ", e);
+        //     throw new DatabaseException("Error querying listing by id", e);
+        // }
     }
 
     public List<Listing> getListingsByOwner(String ownerId){
-        try{
-            //convert the ownerId to a UUID
-            // UUID ownerId = UUID.fromString(ownerId);
-            String sql = "SELECT * FROM listings WHERE owner_id=?";
-            return jdbcTemplate.query(sql, listingRowMapper, UUID.fromString(ownerId));
-        } catch(DataAccessException e){
-            logger.error("Error occurred while retrieving listings with owner id: " + ownerId + ": ", e);
-            throw new DatabaseException("Error querying listings by owner id", e);
-        }
+        String sql = "SELECT * FROM listings WHERE owner_id=?";
+        return jdbcTemplate.query(sql, listingRowMapper, UUID.fromString(ownerId));
+        // } catch(DataAccessException e){
+        //     logger.error("Error occurred while retrieving listings with owner id: " + ownerId + ": ", e);
+        //     throw new DatabaseException("Error querying listings by owner id", e);
+        // }
     }
 
     public List<Listing> getAllListings(){
-        try{
-            String sql = "SELECT * FROM listings";
-            return jdbcTemplate.query(sql, listingRowMapper);
-        } catch(DataAccessException e){
-            logger.error("Error occurred while retrieving listings with id: " + e.getMessage());
-            throw new DatabaseException("Error fetching all users", e);
-        }
+        String sql = "SELECT * FROM listings";
+        return jdbcTemplate.query(sql, listingRowMapper);
+        // } catch(DataAccessException e){
+        //     logger.error("Error occurred while retrieving listings with id: " + e.getMessage());
+        //     throw new DatabaseException("Error fetching all users", e);
         // return null;
     }
 

@@ -19,25 +19,39 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tlcmarketplace.carrental.exception.DatabaseException;
 import tlcmarketplace.carrental.model.Listing;
+import tlcmarketplace.carrental.model.CarListing;
 import tlcmarketplace.carrental.service.ListingService;
+import tlcmarketplace.carrental.service.CarListingService;
 
 @RestController
 @RequestMapping("api/v1/listings")
 public class ListingController{
     private final ListingService listingService;
+    private final CarListingService carListingService;
     private static final Logger logger = LoggerFactory.getLogger(ListingController.class);
 
-    public ListingController(ListingService listingService){this.listingService = listingService;}
+    public ListingController(ListingService listingService, CarListingService carListingService){
+        this.listingService = listingService;
+        this.carListingService = carListingService;
+    }
 
-    @PostMapping("")
-    public ResponseEntity<?> createListing(@RequestBody Listing listing){
-        logger.info("creating listing" + listing);
-
-        Listing newListing = listingService.createListing(listing);
+    @PostMapping("/cars")
+    public ResponseEntity<?> createCarListing(@RequestBody CarListing carListing){
+        logger.info("creating car listing" + carListing);
         //check if the listing was created successfully
-        if(newListing == null) return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "could not create the listing"));
-        else return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("listing", newListing));
+        if(carListing == null) return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "could not create the listing"));
+        else return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("listing", carListingService.createListing(carListing)));
     } 
+
+    // @PostMapping("")
+    // public ResponseEntity<?> createListing(@RequestBody Listing listing){
+    //     logger.info("creating listing" + listing);
+
+    //     Listing newListing = listingService.createListing(listing);
+    //     //check if the listing was created successfully
+    //     if(newListing == null) return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "could not create the listing"));
+    //     else return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("listing", newListing));
+    // } 
 
     @GetMapping("/owner")
     public ResponseEntity<?> getListingsByOwnerId(@RequestParam("ownerId") String ownerId){

@@ -19,10 +19,11 @@ public class ListingService {
 
     public ListingService(ListingDao listingDao) {this.listingDao = listingDao;}
 
-    public Listing createListing(Listing listing){
+    public Long createListing(Listing listing){
         Long id = listingDao.createListing(listing);
         logger.info("created listing with id: " + id);
-        return listingDao.getListingById(id.toString());
+        return id;
+        // return listingDao.getListingById(id.toString());
     }
     public int updateListing(Listing listing) {return listingDao.updateListing(listing);}
     public Listing getListing(String id) {return listingDao.getListingById(id);}

@@ -1,0 +1,58 @@
+<nav class="navbar">
+    <!-- <div class="navbar-left">
+      <img src="assets/logo2.png" alt="Logo" class="logo" />
+    </div> -->
+
+  
+    <!-- <ul class="nav-tabs" [class.responsive]="menuOpen">
+      <li [class.active]="activeTab === 'search'" (click)="selectTab('search')">
+        <a routerLink="/search">Search Listings</a>
+      </li>
+      <li [class.active]="activeTab === 'create'" (click)="selectTab('create')">
+        <a routerLink="/create">Create a Listing</a>
+      </li>
+      <li [class.active]="activeTab === 'help'" (click)="selectTab('help')">
+        <a routerLink="/help">Help</a>
+      </li>
+    </ul> -->
+    <div class="navbar-left">
+        <img src="assets/logo2.png" alt="TLC Bazaar Logo" class="logo" />
+        <button class="hamburger" (click)="menuOpen = !menuOpen">
+            <span>&#9776;</span>
+          </button>
+        <ul class="nav-tabs">
+          <li [class.active]="activeTab === 'search'" (click)="selectTab('search')">
+            <a routerLink="/search">
+                <!-- <i class="material-icons">search</i> -->
+                Search Listings
+            </a>
+          </li>
+          <li [class.active]="activeTab === 'create'" (click)="selectTab('create')">
+            <a routerLink="/create">Create a Listing</a>
+          </li>
+          <li [class.active]="activeTab === 'help'" (click)="selectTab('help')">
+            <a routerLink="/help">Help</a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="navbar-right">
+        <button class="icon-button">
+          <i class="material-icons">favorite_border</i>
+        </button>
+        <button class="icon-button">
+          <i class="material-icons">person</i>
+        </button>
+      </div>
+      
+  
+    <!-- <div class="navbar-right">
+      <button class="icon-button">
+        <i class="material-icons">favorite_border</i>
+      </button>
+      <button class="icon-button">
+        <i class="material-icons">person</i>
+      </button>
+    </div> -->
+  </nav>
+  
